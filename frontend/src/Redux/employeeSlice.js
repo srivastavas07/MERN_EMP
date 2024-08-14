@@ -5,7 +5,6 @@ const employeeSlice = createSlice({
     employees: [],
     updateDetail: {},
     refresh : false,
-    employeeSearch: [],
   },
   reducers: {
     setEmployees(state, action) {
@@ -17,10 +16,7 @@ const employeeSlice = createSlice({
     setRefresh(state) {
       state.refresh = !state.refresh;
     },
-    setSearchEmployee(state, action) {
-      state.employeeSearch = action.payload;
-    },
   },
 });
-export const { setEmployees, setUpdateDetail, setRefresh, setSearchEmployee } = employeeSlice.actions;
+export const { setEmployees, setUpdateDetail, setRefresh, setSearchEmployee, setSearchValue } = employeeSlice.actions;
 export default employeeSlice.reducer;

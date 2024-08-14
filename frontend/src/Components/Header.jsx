@@ -11,19 +11,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { setEmployees } from '../Redux/employeeSlice';
-import { setSearchEmployee } from '../Redux/employeeSlice';
+import debounce from 'lodash.debounce';
 
 const Header = () => {
   const dispatch = useDispatch();
   const { employees } = useSelector(store => store.employee);
-  const [searchValue, setSearchValue] = useState("");
-  console.log(employees);
+  const [searchValue , setSearchValue] = useState(""); 
   const navigate = useNavigate();
   const { admin } = useSelector(store => store.admin);
-  const size = 18;
+
   useEffect(() => {
-    const searchHandler = async () => {
-      console.log(searchValue);
+    const searchHandler = debounce(async () => {
       try {
         const response = await axios.get(`${EMPLOYEE_END_POINT}/search_employee`, {
           params: {
@@ -31,17 +29,17 @@ const Header = () => {
           },
           withCredentials: true,
       });
-        // dispatch(setSearchEmployee(response.data.employees));
-        console.log(response?.data);
+        dispatch(setEmployees(response.data));
       } catch (error) {
-        console.log(error);
         toast.error("Error occurred while searching.");
       }
-    }
-    if(searchValue !== ""){
-      searchHandler();
-    }
+    },400);
+    searchHandler();
+    return () => {
+      searchHandler.cancel();
+    };
   }, [searchValue]);
+
   const logOutHandler = async () => {
     try {
       const response = await axios.get(`${ADMIN_END_POINT}/logout`);
@@ -70,8 +68,8 @@ const Header = () => {
           </div>
         </nav>
         <div className='h-[60px] text-end bg-slate-200 border-t-[1px] border-b-[1px] border-[#000] font-bold text-black flex items-center justify-end'>
-          <p className='px-5'>Total Employees:{employees?.employees?.length}</p>
-          <input onChange={(e) => setSearchValue(e.target.value)} type="text" id="menu-toggle" className=" outline-none rounded-sm border-[2px] border-[#000000cc] py-1 px-1 mr-10" />
+          <p className='px-5'>Total Employees:<span className='text-[#ff2a2a] mx-1'>{employees?.employees?.length}</span></p>
+          <input value={searchValue} onChange={(e) => {setSearchValue(e.target.value)}} type="text" id="menu-toggle" className=" font-medium text-xs outline-none rounded-sm border-[2px] border-[#000000cc] py-2 px-2 w-[15%] mr-10" />
         </div>
 
       </header>

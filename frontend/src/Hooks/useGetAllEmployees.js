@@ -6,7 +6,6 @@ import { EMPLOYEE_END_POINT } from "../utils/constants";
 
 const useGetAllEmployees =async()=>{
     const {refresh} = useSelector(state=>state.employee);
-    console.log("useGetAllEmployees called");
     const dispatch = useDispatch();
     const getAllEmployees = async()=>{
         try{

@@ -67,7 +67,7 @@ const UserForm = () => {
   };
   // Handle form submission
   const handleSubmit = async (e) => {
-    console.log(formData);
+    
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.mobile || !formData.designation || !formData.gender || !formData.courses || !formData.image) {
       toast.error("Please fill all the fields");
@@ -88,7 +88,6 @@ const UserForm = () => {
           'Content-Type': 'application/json',
         },
       });
-      console.log(response?.data?.message);
       toast.success(response?.data?.message);
     } catch (error) {
       console.log(error);
@@ -229,6 +228,7 @@ const UserForm = () => {
         <div className="flex items-center mb-4">
           <FaUpload className="text-gray-500 mr-2" />
           <label htmlFor="image" className="w-1/4 text-sm font-medium text-gray-700">Img Upload</label>
+          <div className='w-full'>
           <input
             type="file"
             id="imgUpload"
@@ -236,6 +236,8 @@ const UserForm = () => {
             onChange={handleImageUpload}
             className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
+          <p className='text-xs mt-1 text-red-500'>{error ? "Only PNG and JPEG formats are allowed.": ""}</p>
+        </div>
         </div>
 
         {/* Submit Button */}

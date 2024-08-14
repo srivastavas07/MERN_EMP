@@ -18,7 +18,6 @@ const AllEmployees = () => {
       const response = await axios.delete(`${EMPLOYEE_END_POINT}/delete/${id}`, {
         withCredentials: true
       })
-      console.log(response);
       toast.success(response.data.message);
       dispatch(setRefresh());
     } catch (error) {
@@ -48,6 +47,7 @@ const AllEmployees = () => {
             {users?.map((user, index) => {
               const date = new Date(user?.createdAt);
               const createDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+              const capiName = user.name.charAt(0).toUpperCase() + user.name.slice(1);
               return (
                 <tr key={user?._id} className='bg-slate-100'>
                   <td className="px-4 py-2 border-b border-gray-200 truncate" title={user?._id}>{user?._id.slice(-6)}</td>
@@ -55,7 +55,7 @@ const AllEmployees = () => {
                     {/* Placeholder for image */}
                     <img src={user?.image} alt="Avatar" className="w-10 h-10 rounded-full" />
                   </td>
-                  <td className="px-4 py-2 border-b border-gray-200">{user.name}</td>
+                  <td className="px-4 py-2 border-b border-gray-200">{capiName}</td>
                   <td className="px-4 py-2 border-b border-gray-200">{user.email}</td>
                   <td className="px-4 py-2 border-b border-gray-200">{user.mobile}</td>
                   <td className="px-4 py-2 border-b border-gray-200">{user.designation}</td>

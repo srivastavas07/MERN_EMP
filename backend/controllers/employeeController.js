@@ -3,7 +3,6 @@ import {Employee} from "../models/employeeSchema.js";
 export const create_employee = async (req, res) => {
     try {
         const {name, email, mobile, designation, gender, course, image} = req.body;
-        console.log(req.body);
         const employee = new Employee({
             name,
             email,
@@ -63,12 +62,14 @@ export const delete_employee = async (req, res) => {
 export const searchEmployee = async (req, res) => {
     try {
         const {searchValue} = req.query;
-        console.log("this" + searchValue);
         const employees = await Employee.find({
             $or: [
                 { name: { $regex: searchValue, $options: "i" } },
                 { mobile: { $regex: searchValue, $options: "i" } },
-                { email: { $regex: searchValue, $options: "i" } }
+                { email: { $regex: searchValue, $options: "i" } },
+                { designation: { $regex: searchValue, $options: "i" } },
+                { gender: { $regex: searchValue, $options: "i" } },
+                { course: { $elemMatch: { $regex: searchValue, $options: "i" } } }
             ]
         });
 
