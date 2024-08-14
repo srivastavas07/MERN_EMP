@@ -17,28 +17,30 @@ const UpdateEmployee = () => {
   const { updateDetail } = useSelector(store => store.employee);
   const [error, setError] = useState(false);
   const [formData, setFormData] = useState({
-    name: updateDetail.name,
-    email: updateDetail.email,
-    mobile: updateDetail.mobile,
-    designation: updateDetail.designation,
-    gender: updateDetail.gender,
-    courses: updateDetail.course,
-    image: updateDetail.image,
+    name: '',
+    email: '',
+    mobile: '',
+    designation: '',
+    gender: '',
+    courses: [],
+    image: ''
   });
+  console.log(updateDetail);
   useEffect(() => {
+    if(updateDetail){
     setFormData({
-      name: updateDetail.name,
-      email: updateDetail.email,
-      mobile: updateDetail.mobile,
-      designation: updateDetail.designation,
-      gender: updateDetail.gender,
-      courses: updateDetail.course,
-      image: updateDetail.image,
-    });
+      name: updateDetail.name || '',
+      email: updateDetail.email || '',
+      mobile: updateDetail.mobile || '',
+      designation: updateDetail.designation || '',
+      gender: updateDetail.gender || '',
+      courses: updateDetail.course || [],
+      image: updateDetail.image || ''
+    })};
   }, [updateDetail]);
 
   const handleChange = (e) => {
-    const { name, value, type, checked} = e.target;
+    const { name, value, type, checked } = e.target;
     if (type === 'checkbox') {
       setFormData((prevData) => ({
         ...prevData,
@@ -61,11 +63,11 @@ const UpdateEmployee = () => {
       maxWidthOrHeight: 1920, // Max width/height for the image
       useWebWorker: true,
     };
-    if(file){
+    if (file) {
       const fileType = file.type;
       if (fileType !== 'image/png' && fileType !== 'image/jpeg') {
         setError(true);
-      }else{
+      } else {
         setError(false);
         try {
           const compressedFile = await imageCompression(file, options);
@@ -96,8 +98,8 @@ const UpdateEmployee = () => {
         gender: formData.gender,
         course: formData.courses,
         image: formData.image, // Send Base64 string to backend
-      },{
-        withCredentials:true
+      }, {
+        withCredentials: true
       });
       dispatch(setRefresh());
       toast.success(response.data.message);
@@ -240,15 +242,15 @@ const UpdateEmployee = () => {
           <FaUpload className="text-gray-500 mr-2" />
           <label htmlFor="imgUpload" className="w-1/4 text-sm font-medium text-gray-700">Img Upload</label>
           <div className='w-full'>
-          <input
-            type="file"
-            id="imgUpload"
-            name="image"
-            onChange={handleImageUpload}
-            className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-          />
-          <p className='text-xs mt-1 text-red-500'>{error ? "Only PNG and JPEG formats are allowed.": ""}</p>
-        </div>
+            <input
+              type="file"
+              id="imgUpload"
+              name="image"
+              onChange={handleImageUpload}
+              className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            />
+            <p className='text-xs mt-1 text-red-500'>{error ? "Only PNG and JPEG formats are allowed." : ""}</p>
+          </div>
         </div>
 
         {/* Submit Button */}
