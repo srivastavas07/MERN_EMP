@@ -10,7 +10,7 @@ import { ADMIN_END_POINT, EMPLOYEE_END_POINT } from '../utils/constants';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { setEmployees } from '../Redux/employeeSlice';
+import { setEmployees, setRefresh, setUpdateDetail } from '../Redux/employeeSlice';
 import debounce from 'lodash.debounce';
 
 const Header = () => {
@@ -47,6 +47,8 @@ const Header = () => {
       navigate("/login");
       dispatch(setAdmin(null));
       dispatch(setEmployees([]));
+      dispatch(setRefresh(false));
+      dispatch(setUpdateDetail({}));
     } catch (error) {
       console.log(error);
     }
