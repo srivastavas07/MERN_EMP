@@ -111,11 +111,7 @@ const UpdateEmployee = () => {
   return (
     <div className='w-full h-full flex justify-center items-center'>
       <Header />
-<<<<<<< HEAD
       <form className="w-[55vw] p-8 bg-white rounded-sm mt-[10%] shadow-2xl border-light" onSubmit={handleSubmit}>
-=======
-      <form className="w-[55vw] p-8 bg-white rounded-lg shadow-md" onSubmit={handleSubmit}>
->>>>>>> 75376c0603125492848baae54e1a0d92d9281d4d
         {/* Name */}
         <div className="flex items-center mb-4">
           <FaUser className="text-gray-500 mr-2" />

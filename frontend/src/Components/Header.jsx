@@ -7,11 +7,7 @@ import { IoMdHome } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import { setAdmin } from '../Redux/adminSlice';
 import { ADMIN_END_POINT, EMPLOYEE_END_POINT } from '../utils/constants';
-<<<<<<< HEAD
 import { Link, useNavigate, useParams } from 'react-router-dom';
-=======
-import { Link, useNavigate } from 'react-router-dom';
->>>>>>> 75376c0603125492848baae54e1a0d92d9281d4d
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { setEmployees, setRefresh, setUpdateDetail } from '../Redux/employeeSlice';
@@ -20,42 +16,24 @@ import debounce from 'lodash.debounce';
 const Header = () => {
   const dispatch = useDispatch();
   const { employees } = useSelector(store => store.employee);
-<<<<<<< HEAD
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
   const { admin } = useSelector(store => store.admin);
   const link = useParams();
-=======
-  const [searchValue , setSearchValue] = useState(""); 
-  const navigate = useNavigate();
-  const { admin } = useSelector(store => store.admin);
-
->>>>>>> 75376c0603125492848baae54e1a0d92d9281d4d
   useEffect(() => {
     const searchHandler = debounce(async () => {
       try {
         const response = await axios.get(`${EMPLOYEE_END_POINT}/search_employee`, {
           params: {
-<<<<<<< HEAD
             searchValue: searchValue,
           },
           withCredentials: true,
         });
-=======
-              searchValue:searchValue,
-          },
-          withCredentials: true,
-      });
->>>>>>> 75376c0603125492848baae54e1a0d92d9281d4d
         dispatch(setEmployees(response.data));
       } catch (error) {
         toast.error("Error occurred while searching.");
       }
-<<<<<<< HEAD
     }, 400);
-=======
-    },400);
->>>>>>> 75376c0603125492848baae54e1a0d92d9281d4d
     searchHandler();
     return () => {
       searchHandler.cancel();
@@ -91,17 +69,11 @@ const Header = () => {
             </div>
           </div>
         </nav>
-<<<<<<< HEAD
         <div className='text-end bg-slate-200 py-5 border-t-[1px] border-b-[1px] border-[#000] font-bold text-black flex items-center justify-end'>
           <p className='px-5'>Total Employees:<span className='text-[#ff2a2a] mx-1'>{employees?.employees?.length}</span></p>
           <div classNam="input-container">
             <input value={searchValue} onChange={(e) => { setSearchValue(e.target.value) }} type="text" id="menu-toggle" placeholder="Search here.." className=" input mr-10" />
           </div>
-=======
-        <div className='h-[60px] text-end bg-slate-200 border-t-[1px] border-b-[1px] border-[#000] font-bold text-black flex items-center justify-end'>
-          <p className='px-5'>Total Employees:<span className='text-[#ff2a2a] mx-1'>{employees?.employees?.length}</span></p>
-          <input value={searchValue} onChange={(e) => {setSearchValue(e.target.value)}} type="text" id="menu-toggle" className=" font-medium text-xs outline-none rounded-sm border-[2px] border-[#000000cc] py-2 px-2 w-[15%] mr-10" />
->>>>>>> 75376c0603125492848baae54e1a0d92d9281d4d
         </div>
 
       </header>
@@ -109,8 +81,4 @@ const Header = () => {
   );
 };
 
-<<<<<<< HEAD
 export default Header;
-=======
-export default Header;
->>>>>>> 75376c0603125492848baae54e1a0d92d9281d4d
