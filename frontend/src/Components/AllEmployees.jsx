@@ -60,6 +60,7 @@ const AllEmployees = () => {
                   <td className="px-4 py-2 border-b border-gray-200">{user.mobile}</td>
                   <td className="px-4 py-2 border-b border-gray-200">{user.designation}</td>
                   <td className="px-4 py-2 border-b border-gray-200">{user.gender === "M"?"Male":"Female"}</td>
+
                   <td className="px-4 py-2 border-b border-gray-200 space-x-1">
                     {user.course.map((course, index) => (
                       <p className='inline-block' key={index}>{course}</p>

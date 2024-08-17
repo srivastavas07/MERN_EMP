@@ -127,6 +127,7 @@ body{
   transform: translate(0, 0);
   border-bottom: 2px solid rgb(50, 50, 50);
 }
+<<<<<<< HEAD
 .input {
   width: 100%;
   max-width: 270px;
@@ -337,3 +338,5 @@ body{
 .border-light{
   border:1px solid rgba(0, 0, 0, 0.61);
 }
+=======
+>>>>>>> 75376c0603125492848baae54e1a0d92d9281d4d

@@ -97,7 +97,11 @@ const UserForm = () => {
   return (
     <div className='flex items-center w-[100vw] h-full relative'>
       <Header/>
+<<<<<<< HEAD
       <form onSubmit={handleSubmit} className=" w-[55vw] mx-auto mt-[10%] p-8 border-light bg-white rounded-sm shadow-2xl">
+=======
+      <form onSubmit={handleSubmit} className=" w-[55vw] mx-auto p-8 bg-white rounded-lg shadow-2xl">
+>>>>>>> 75376c0603125492848baae54e1a0d92d9281d4d
         {/* Name */}
         <div className="flex items-center mb-4">
           <FaUser className="text-gray-500 mr-2" />
