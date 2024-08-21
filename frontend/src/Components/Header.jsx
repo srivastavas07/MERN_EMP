@@ -14,6 +14,7 @@ import { setEmployees, setRefresh, setUpdateDetail } from '../Redux/employeeSlic
 import debounce from 'lodash.debounce';
 
 const Header = () => {
+  const currentLocation = window.location.pathname;
   const dispatch = useDispatch();
   const { employees } = useSelector(store => store.employee);
   const [searchValue, setSearchValue] = useState("");
@@ -69,12 +70,14 @@ const Header = () => {
             </div>
           </div>
         </nav>
-        <div className='text-end bg-slate-200 py-5 border-t-[1px] border-b-[1px] border-[#000] font-bold text-black flex items-center justify-end'>
-          <p className='px-5'>Total Employees:<span className='text-[#ff2a2a] mx-1'>{employees?.employees?.length}</span></p>
-          <div classNam="input-container">
-            <input value={searchValue} onChange={(e) => { setSearchValue(e.target.value) }} type="text" id="menu-toggle" placeholder="Search here.." className=" input mr-10" />
-          </div>
-        </div>
+        {currentLocation === "/all_employees" &&
+          <div className='text-end bg-slate-200 py-5 border-t-[1px] border-b-[1px] border-[#000] font-bold text-black flex items-center justify-end'>
+            <p className='px-5'>Total Employees:<span className='text-[#ff2a2a] mx-1'>{employees?.employees?.length}</span></p>
+            <div className="input-container mr-10">
+              <input value={searchValue} onChange={(e) => { setSearchValue(e.target.value) }} type="text" id="menu-toggle" placeholder="Search here.." className="input" />
+            </div>
+          </div>}
+
 
       </header>
     </>

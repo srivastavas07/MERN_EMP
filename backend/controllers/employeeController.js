@@ -82,3 +82,54 @@ export const searchEmployee = async (req, res) => {
         return res.status(500).json({ message: "Error agya", success: false });
     }
 }
+export const validateData = async (req, res) => {
+    try {
+        const { email, number } = req.query;
+
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        const phoneNumberPattern = /^\d{10}$/;
+
+        if (!emailPattern.test(email)) {
+            return res.status(200).json({
+                message: "Invalid email address.",
+                success: false,
+            });
+        }
+
+        if (!phoneNumberPattern.test(number)) {
+            return res.status(200).json({
+                message: "Number must be exactly 10 digits.",
+                success: false,
+            });
+        }
+
+        const emailExists = await Employee.findOne({ email }).select("-image");
+        const numberExists = await Employee.findOne({ mobile: number }).select("-image");
+        if (emailExists) {
+            return res.status(200).json({
+                message: "Email already exists.",
+                success: false,
+            });
+        }
+
+        if (numberExists) {
+            return res.status(200).json({
+                message: "Number already exists.",
+                success: false,
+            });
+        }
+
+        return res.status(200).json({
+            message: "Validation done successfully.",
+            success: true,
+        });
+
+    } catch (error) {
+        console.error("Validation error:", error);
+        return res.status(500).json({
+            message: "Internal server error.",
+            success: false,
+        });
+    }
+};
+

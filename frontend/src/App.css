@@ -313,9 +313,10 @@ body{
   content: "|";
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
   color: #000;
+  background-color: transparent;
   animation: blink 0.7s step-end infinite;
 }
 
