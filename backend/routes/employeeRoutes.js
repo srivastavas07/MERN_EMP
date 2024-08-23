@@ -1,5 +1,5 @@
 import express from "express";
-import { create_employee, delete_employee, get_employee, get_employees, searchEmployee, update_employee } from "../controllers/employeeController.js";
+import { create_employee, delete_employee, get_employee, get_employees, searchEmployee, update_employee, validateData } from "../controllers/employeeController.js";
 import { isAuthenticated } from "../config/auth.js";
 const router = express.Router();
 router.route('/create').post(create_employee);
@@ -8,4 +8,5 @@ router.route('/update/:id').put(update_employee);
 router.route('/get_employees').get(get_employees);
 router.route('/get_employee/:id').get(get_employee);
 router.route('/search_employee').get(searchEmployee);
+router.route('/validation').get(validateData);
 export default router;

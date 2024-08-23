@@ -25,18 +25,18 @@ const UpdateEmployee = () => {
     courses: [],
     image: ''
   });
-  console.log(updateDetail);
   useEffect(() => {
-    if(updateDetail){
-    setFormData({
-      name: updateDetail.name || '',
-      email: updateDetail.email || '',
-      mobile: updateDetail.mobile || '',
-      designation: updateDetail.designation || '',
-      gender: updateDetail.gender || '',
-      courses: updateDetail.course || [],
-      image: updateDetail.image || ''
-    })};
+    if (updateDetail) {
+      setFormData({
+        name: updateDetail.name || '',
+        email: updateDetail.email || '',
+        mobile: updateDetail.mobile || '',
+        designation: updateDetail.designation || '',
+        gender: updateDetail.gender || '',
+        courses: updateDetail.course || [],
+        image: updateDetail.image || ''
+      })
+    };
   }, [updateDetail]);
 
   const handleChange = (e) => {
@@ -58,6 +58,7 @@ const UpdateEmployee = () => {
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
+  
     const options = {
       maxSizeMB: 1, // Maximum file size in MB
       maxWidthOrHeight: 1920, // Max width/height for the image
@@ -67,6 +68,9 @@ const UpdateEmployee = () => {
       const fileType = file.type;
       if (fileType !== 'image/png' && fileType !== 'image/jpeg') {
         setError(true);
+        e.target.value = "";
+        toast.error('Invalid file format.');
+        return;
       } else {
         setError(false);
         try {
@@ -89,6 +93,30 @@ const UpdateEmployee = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.name || !formData.email || !formData.mobile || !formData.designation || !formData.gender || !formData.courses) {
+      toast.error("Fields cant be empty.");
+    }
+    else if (!formData.image) {
+      toast.error("Invalid Image or << 1Mb");
+      return;
+    };
+    if(updateDetail.email === formData.email && updateDetail.mobile === formData.mobile){
+        const isValid = await dataValidation(formData.email, formData.mobile);
+        if(!isValid){
+            return;
+        }
+    }
+    else if (updateDetail.email !== formData.email) {
+      const isValid = await dataValidation(formData.email, "");
+      if (!isValid) {
+        return;
+      }
+    }else if(updateDetail.mobile !== formData.mobile){
+        const isValid = await dataValidation("", formData.mobile);
+        if (!isValid) {
+          return;
+        }
+    }
     try {
       const response = await axios.put(`${EMPLOYEE_END_POINT}/update/${id}`, {
         name: formData.name,
@@ -107,15 +135,29 @@ const UpdateEmployee = () => {
       console.log(error);
     }
   };
+  const dataValidation = async (email, number) => {
+    try {
+      const response = await axios.get(`${EMPLOYEE_END_POINT}/validation`, {
+        params: {
+          email: email,
+          number: number
+        },
+        withCredentials: true,
+      });
+      response.data.success ? toast.success(response?.data?.message) : toast.error(response?.data?.message);
+      if (response?.data?.success) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.log("Couldn't validate data.")
+    }
+  }
 
   return (
     <div className='w-full h-full flex justify-center items-center'>
       <Header />
-<<<<<<< HEAD
-      <form className="w-[55vw] p-8 bg-white rounded-sm mt-[10%] shadow-2xl border-light" onSubmit={handleSubmit}>
-=======
-      <form className="w-[55vw] p-8 bg-white rounded-lg shadow-md" onSubmit={handleSubmit}>
->>>>>>> 75376c0603125492848baae54e1a0d92d9281d4d
+      <form className="w-[55vw] p-8 bg-white rounded-sm shadow-2xl border-light" onSubmit={handleSubmit}>
         {/* Name */}
         <div className="flex items-center mb-4">
           <FaUser className="text-gray-500 mr-2" />
@@ -244,7 +286,7 @@ const UpdateEmployee = () => {
         {/* Image Upload */}
         <div className="flex items-center mb-4">
           <FaUpload className="text-gray-500 mr-2" />
-          <label htmlFor="imgUpload" className="w-1/4 text-sm font-medium text-gray-700">Img Upload</label>
+          <label htmlFor="imgUpload" className="w-1/4 text-sm font-medium text-gray-700">New image</label>
           <div className='w-full'>
             <input
               type="file"
@@ -253,7 +295,7 @@ const UpdateEmployee = () => {
               onChange={handleImageUpload}
               className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
             />
-            <p className='text-xs mt-1 text-red-500'>{error ? "Only PNG and JPEG formats are allowed." : ""}</p>
+            <p className='text-xs mt-1 text-red-500'>{error ? "Only PNG and JPEG formats are allowed.(under 1Mb)" : ""}</p>
           </div>
         </div>
 

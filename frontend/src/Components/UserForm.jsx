@@ -43,11 +43,11 @@ const UserForm = () => {
       maxWidthOrHeight: 1920, // Max width/height for the image
       useWebWorker: true,
     };
-    if(file){
+    if (file) {
       const fileType = file.type;
       if (fileType !== 'image/png' && fileType !== 'image/jpeg') {
         setError(true);
-      }else{
+      } else {
         setError(false);
         try {
           const compressedFile = await imageCompression(file, options);
@@ -67,11 +67,18 @@ const UserForm = () => {
   };
   // Handle form submission
   const handleSubmit = async (e) => {
-    
+
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.mobile || !formData.designation || !formData.gender || !formData.courses || !formData.image) {
-      toast.error("Please fill all the fields");
+    if (!formData.name || !formData.email || !formData.mobile || !formData.designation || !formData.gender || !formData.courses) {
+      toast.error("Please enter all fields.");
+    }else if(!formData.image){
+      toast.error("Image empty or invalid");
+      return;
     }
+   const isValid = await dataValidation(formData.email,formData.mobile);
+   if(!isValid){
+    return;
+   }
     try {
       const response = await axios.post(`${EMPLOYEE_END_POINT}/create`, {
         name: formData.name,
@@ -81,9 +88,9 @@ const UserForm = () => {
         gender: formData.gender,
         course: formData.courses,
         image: formData.image, // Send Base64 string to backend
-      },{
-        withCredentials:true,
-      },{
+      }, {
+        withCredentials: true,
+      }, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -93,15 +100,29 @@ const UserForm = () => {
       console.log(error);
     }
   };
+  const dataValidation = async(email, number) => {
+    try {
+      const response = await axios.get(`${EMPLOYEE_END_POINT}/validation`, {
+        params: {
+          email: email,
+          number: number
+        },
+        withCredentials: true,
+      });
+      response.data.success ? toast.success(response?.data?.message): toast.error(response?.data?.message);
+      if(response?.data?.success){
+        return true;
+      }
+      return false;
+    } catch(error){
+      console.log("Couldn't validate data.")
+    }
+  }
 
   return (
     <div className='flex items-center w-[100vw] h-full relative'>
-      <Header/>
-<<<<<<< HEAD
-      <form onSubmit={handleSubmit} className=" w-[55vw] mx-auto mt-[10%] p-8 border-light bg-white rounded-sm shadow-2xl">
-=======
-      <form onSubmit={handleSubmit} className=" w-[55vw] mx-auto p-8 bg-white rounded-lg shadow-2xl">
->>>>>>> 75376c0603125492848baae54e1a0d92d9281d4d
+      <Header />
+      <form onSubmit={handleSubmit} className=" w-[55vw] mx-auto p-8 border-light bg-white rounded-sm shadow-2xl">
         {/* Name */}
         <div className="flex items-center mb-4">
           <FaUser className="text-gray-500 mr-2" />
@@ -233,15 +254,15 @@ const UserForm = () => {
           <FaUpload className="text-gray-500 mr-2" />
           <label htmlFor="image" className="w-1/4 text-sm font-medium text-gray-700">Img Upload</label>
           <div className='w-full'>
-          <input
-            type="file"
-            id="imgUpload"
-            name="image"
-            onChange={handleImageUpload}
-            className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-          />
-          <p className='text-xs mt-1 text-red-500'>{error ? "Only PNG and JPEG formats are allowed.": ""}</p>
-        </div>
+            <input
+              type="file"
+              id="imgUpload"
+              name="image"
+              onChange={handleImageUpload}
+              className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            />
+            <p className='text-xs mt-1 text-red-500'>{error ? "Only PNG and JPEG formats are allowed.(under 1Mb)" : ""}</p>
+          </div>
         </div>
 
         {/* Submit Button */}

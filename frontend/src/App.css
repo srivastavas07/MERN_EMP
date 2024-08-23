@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
 body{
   background:url("https://w0.peakpx.com/wallpaper/836/705/HD-wallpaper-material-flat-blue-light-theme-white.jpg");
   background-position: center;
@@ -127,7 +128,6 @@ body{
   transform: translate(0, 0);
   border-bottom: 2px solid rgb(50, 50, 50);
 }
-<<<<<<< HEAD
 .input {
   width: 100%;
   max-width: 270px;
@@ -314,9 +314,10 @@ body{
   content: "|";
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
   color: #000;
+  background-color: transparent;
   animation: blink 0.7s step-end infinite;
 }
 
@@ -338,5 +339,16 @@ body{
 .border-light{
   border:1px solid rgba(0, 0, 0, 0.61);
 }
-=======
->>>>>>> 75376c0603125492848baae54e1a0d92d9281d4d
+.caveat-fonty {
+  font-family: "Caveat", cursive;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-size:4rem;
+  font-style: normal;
+}
+.adminBanner{
+  background:linear-gradient(to right, #00e5ffc8,rgba(34, 102, 157, 0), rgba(255, 255, 255, 0));
+  border:3px solid rgb(0, 0, 0);
+  border-radius:6%;
+  overflow: hidden;
+}
