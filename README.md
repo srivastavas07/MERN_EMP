@@ -18,7 +18,7 @@
 For any inquiries or issues, reach out via email:  
 **srivastavasks156@gmail.com**
 
-PORT=8055
-MONGO_URI= your_mongo_uri
-TOKEN_SECRET= your_token_secret_for_jwt
-CORS_ORIGIN=http://localhost:3000
+**PORT**=8055
+**MONGO_URI**= your_mongo_uri
+**TOKEN_SECRET**= your_token_secret_for_jwt
+**CORS_ORIGIN**=http://localhost:3000
