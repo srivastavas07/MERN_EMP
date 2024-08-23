@@ -100,11 +100,22 @@ const UpdateEmployee = () => {
       toast.error("Invalid Image or << 1Mb");
       return;
     };
-    if (updateDetail.email !== formData.email || updateDetail.mobile !== formData.mobile) {
-      const isValid = await dataValidation(formData.email, formData.mobile);
+    if(updateDetail.email === formData.email && updateDetail.mobile === formData.mobile){
+        const isValid = await dataValidation(formData.email, formData.mobile);
+        if(!isValid){
+            return;
+        }
+    }
+    else if (updateDetail.email !== formData.email) {
+      const isValid = await dataValidation(formData.email, "");
       if (!isValid) {
         return;
       }
+    }else if(updateDetail.mobile !== formData.mobile){
+        const isValid = await dataValidation("", formData.mobile);
+        if (!isValid) {
+          return;
+        }
     }
     try {
       const response = await axios.put(`${EMPLOYEE_END_POINT}/update/${id}`, {
