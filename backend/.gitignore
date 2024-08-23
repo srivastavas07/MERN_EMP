@@ -26,3 +26,6 @@ pnpm-debug.log*
 # Build output
 /build
 /dist
+
+#ignore DS_store
+.DS_Store
