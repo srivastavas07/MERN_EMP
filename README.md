@@ -23,3 +23,21 @@ PORT=8055
 MONGO_URI=your_mongo_uri
 TOKEN_SECRET=your_token_secret_for_jwt
 CORS_ORIGIN=http://localhost:3000
+
+```
+
+## 🖼️ Screenshots
+
+Below are some screenshots of the Kmail app in action:
+
+### 1. **Login Screen**
+![Login Screen](https://drive.google.com/uc?export=view&id=1oCT0Mi42xiqSPVcZuhzcPRHZD8U4skhE)
+
+### 2. **Dashboard**
+![Dashboard View](https://drive.google.com/uc?export=view&id=1oCT0Mi42xiqSPVcZuhzcPRHZD8U4skhE)
+
+### 3. **Create and Edit Employee**
+![Create edit form view](https://drive.google.com/uc?export=view&id=1oCT0Mi42xiqSPVcZuhzcPRHZD8U4skhE)
+
+### 3. **Employee List**
+![Employee table view](https://drive.google.com/uc?export=view&id=1oCT0Mi42xiqSPVcZuhzcPRHZD8U4skhE)
