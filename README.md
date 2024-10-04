@@ -34,10 +34,10 @@ Below are some screenshots of the Kmail app in action:
 ![Login Screen](./preview/Screenshot%202024-10-05%20at%2012.36.34%20AM.png)
 
 ### 2. **Dashboard**
-![Dashboard View](./preview/Screenshot%202024-10-05%20at%2012.36.41%20AM.png)
+![Dashboard View](./preview/Screenshot%202024-10-05%20at%2012.36.57%20AM.png)
 
 ### 3. **Create and Edit Employee**
 ![Create edit form view](./preview/Screenshot%202024-10-05%20at%2012.36.49%20AM.png)
 
 ### 4. **Landing page**
-![Landing page view](./preview/Screenshot%202024-10-05%20at%2012.36.57%20AM.png)
+![Landing page view](./preview/Screenshot%202024-10-05%20at%2012.36.41%20AM.png)
