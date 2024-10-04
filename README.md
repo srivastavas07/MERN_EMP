@@ -31,13 +31,13 @@ CORS_ORIGIN=http://localhost:3000
 Below are some screenshots of the Kmail app in action:
 
 ### 1. **Login Screen**
-![Login Screen](https://drive.google.com/uc?export=view&id=1oCT0Mi42xiqSPVcZuhzcPRHZD8U4skhE)
+![Login Screen](./preview/Screenshot%202024-10-05%20at%2012.36.34%20AM.png)
 
 ### 2. **Dashboard**
-![Dashboard View](https://drive.google.com/uc?export=view&id=1oCT0Mi42xiqSPVcZuhzcPRHZD8U4skhE)
+![Dashboard View](./preview/Screenshot%202024-10-05%20at%2012.36.41%20AM.png)
 
 ### 3. **Create and Edit Employee**
-![Create edit form view](https://drive.google.com/uc?export=view&id=1oCT0Mi42xiqSPVcZuhzcPRHZD8U4skhE)
+![Create edit form view](./preview/Screenshot%202024-10-05%20at%2012.36.49%20AM.png)
 
-### 3. **Employee List**
-![Employee table view](https://drive.google.com/uc?export=view&id=1oCT0Mi42xiqSPVcZuhzcPRHZD8U4skhE)
+### 4. **Landing page**
+![Landing page view](./preview/Screenshot%202024-10-05%20at%2012.36.57%20AM.png)
