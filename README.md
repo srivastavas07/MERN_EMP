@@ -11,6 +11,8 @@
   _Used for creating and decoding cookies._
 - **CORS_ORIGIN**: `http://localhost:3000`
 
+## VIEW Project here : https://drive.google.com/drive/folders/1HkpL6M_8i7xjQhHK4UZkpe0PCIZNxdwl?usp=sharing
+
 ## 🖥️ Frontend Environment Variables
 - No variables required.
 
